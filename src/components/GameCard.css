@@ -1,0 +1,20 @@
+.game-link {
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 150px;
+  height: 200px;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.image-container {
+  height: 100px;
+}
+
+.image-container > img {
+  height: 100%;
+}
