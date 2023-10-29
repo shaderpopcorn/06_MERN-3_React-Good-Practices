@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import TicTacToe from "./pages/TicTacToe";
 import Hangman from "./pages/Hangman";
-import Solitaire from "./pages/Solitaire";
+import Sudoku from "./pages/Sudoku";
 import "./App.css";
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/tictactoe" element={<TicTacToe />} />
             <Route path="/hangman" element={<Hangman />} />
-            <Route path="/solitaire" element={<Solitaire />} />
+            <Route path="/sudoku" element={<Sudoku />} />
           </Route>
         </Routes>
       </BrowserRouter>

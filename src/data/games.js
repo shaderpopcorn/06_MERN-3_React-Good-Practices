@@ -12,9 +12,9 @@ export const GAMES = [
     name: "Hangman",
   },
   {
-    pageUrl: "/solitaire",
+    pageUrl: "/sudoku",
     imageUrl: test,
-    name: "Solitaire",
+    name: "Sudoku",
   },
   {
     pageUrl: "/memory",

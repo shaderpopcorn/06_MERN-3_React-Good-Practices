@@ -1,13 +1,13 @@
 import { useState } from "react";
 import GameBoard from "../components/GameBoard";
-import "./Solitaire.css";
+import "./Sudoku.css";
 
-const Solitaire = () => {
+const Sudoku = () => {
   return (
     <>
-      <GameBoard></GameBoard>
+      <GameBoard headline={"SUDOKU"}></GameBoard>
     </>
   );
 };
 
-export default Solitaire;
+export default Sudoku;
