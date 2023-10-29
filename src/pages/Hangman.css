@@ -12,7 +12,18 @@
 }
 
 .hm-masked-word {
+  font-weight: 700;
   margin-top: 1rem;
+}
+
+.word-white {
+  font-weight: 700;
+  color: var(--offWhite);
+}
+
+.word-yellow {
+  font-weight: 700;
+  color: var(--yellow);
 }
 
 .input-container {
@@ -64,6 +75,12 @@
   border: 1px solid var(--yellow);
 }
 
+.letter-grey {
+  color: var(--darkGreyLighter);
+  border: 1px solid var(--darkGreyLighter);
+  pointer-events: none;
+}
+
 .word-input,
 .submit-button {
   background-color: transparent;
@@ -73,9 +90,31 @@
   font-size: 0.75rem;
   width: 200px;
   margin: 0.5rem;
+  color: var(--offWhite);
 }
 
 .submit-button:hover {
   color: var(--yellow);
   border: 1px solid var(--yellow);
+}
+
+.hm-icon-container {
+  position: relative;
+}
+
+.hm-icon-full {
+  position: absolute;
+  stroke: var(--offWhite);
+  stroke-width: 1;
+  stroke-linecap: round;
+  fill: none;
+  z-index: 1;
+}
+
+.hm-icon-half {
+  position: absolute;
+  stroke: var(--darkGreyLighter);
+  stroke-width: 1;
+  stroke-linecap: round;
+  fill: none;
 }

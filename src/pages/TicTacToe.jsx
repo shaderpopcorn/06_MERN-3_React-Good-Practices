@@ -6,6 +6,7 @@ import "./TicTacToe.css";
 const TicTacToe = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [countClicks, setCountClicks] = useState(0);
   let winSquares = Array(9).fill(false);
 
   const iconX = (
@@ -14,7 +15,7 @@ const TicTacToe = () => {
       xmlns="http://www.w3.org/2000/svg"
       width="70"
       height="70"
-      fill="white"
+      // fill="white"
       stroke="none"
       viewBox="-5 -5 35 35"
     >
@@ -26,7 +27,7 @@ const TicTacToe = () => {
       className="iconO"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      stroke="white"
+      // stroke="white"
     >
       <circle cx="105" cy="50" r="20" strokeWidth="10" />
     </svg>
@@ -62,6 +63,18 @@ const TicTacToe = () => {
     xIsNext ? (nextSquares[i] = "x") : (nextSquares[i] = "o");
     setXIsNext(!xIsNext);
     setSquares(nextSquares);
+    setCountClicks(() => countClicks + 1);
+  };
+
+  const handleWinnerLine = (a, b, c) => {
+    winSquares = Array(9)
+      .fill(false)
+      .map((item, i) => {
+        if (i === a) return true;
+        if (i === b) return true;
+        if (i === c) return true;
+        return item;
+      });
   };
 
   const getWinner = (squares) => {
@@ -80,31 +93,29 @@ const TicTacToe = () => {
     return null;
   };
 
-  const handleWinnerLine = (a, b, c) => {
-    winSquares = Array(9)
-      .fill(false)
-      .map((item, i) => {
-        if (i === a) return true;
-        if (i === b) return true;
-        if (i === c) return true;
-        return item;
-      });
-  };
-
   const winner = getWinner(squares);
   let status;
-  winner
-    ? (status = "The Winner is: " + (winner === "x" ? "Player X" : "Player O"))
-    : (status = "Next Player: " + (xIsNext ? "X" : "O"));
+  if (countClicks <= 9 && winner)
+    status = "The Winner is: " + (winner === "x" ? "Player X" : "Player O");
+  else if (countClicks < 9 && !winner)
+    status = "Next Player: " + (xIsNext ? "X" : "O");
+  else if (countClicks === 9 && !winner) {
+    status = "Its a Tie";
+  }
 
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
+    setCountClicks(0);
   };
 
   return (
-    <>
-      <GameBoard status={status} handleReset={handleReset}>
+    <div className="ttt-container">
+      <GameBoard
+        status={status}
+        headline={"TIC-TAC-TOE"}
+        handleReset={handleReset}
+      >
         <div>
           <div className="board-row">
             <Square
@@ -167,7 +178,7 @@ const TicTacToe = () => {
           </div>
         </div>
       </GameBoard>
-    </>
+    </div>
   );
 };
 
