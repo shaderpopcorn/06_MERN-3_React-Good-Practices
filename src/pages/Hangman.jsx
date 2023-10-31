@@ -17,9 +17,6 @@ const Hangman = () => {
       <svg
         className="hm-icon-half"
         viewBox="-7 0 100 100"
-        // strokeWidth="1"
-        // strokeLinecap="round"
-        // fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <line x1="10" y1="80" x2="30" y2="80" />
