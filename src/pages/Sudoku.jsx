@@ -32,7 +32,10 @@ const Sudoku = () => {
             <>
               <button
                 key={i}
-                className="sdk-field"
+                className={[
+                  "sdk-field",
+                  field !== null ? "field-white" : "field-grey",
+                ].join(" ")}
                 // onClick={() => handleFieldClick(i)}
               >
                 <span>{field}</span>
@@ -45,7 +48,7 @@ const Sudoku = () => {
             <>
               <button
                 key={i + 100}
-                className="sdk-field"
+                className="sdk-button-field"
                 onClick={() => handleButtonFieldClick(i, field)}
               >
                 <span>{field}</span>
@@ -60,7 +63,7 @@ const Sudoku = () => {
                 key={i + 200}
                 className={[
                   "sdk-fake-field",
-                  i === fieldId ? "field-yellow" : "field-grey",
+                  i === fieldId ? "field-yellow" : "button-field-grey",
                   // fieldClicked ? "visible" : "hidden",
                   // numberClicked ? "hidden" : "visible",
                 ].join(" ")}
