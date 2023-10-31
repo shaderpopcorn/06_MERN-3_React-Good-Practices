@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GameBoard from "../components/GameBoard";
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import "./Sudoku.css";
@@ -6,19 +6,47 @@ import "./Sudoku.css";
 const Sudoku = () => {
   const [puzzle, setPuzzle] = useState(() => makepuzzle());
   const [puzzleCopy, setPuzzleCopy] = useState(puzzle);
-  const solution = solvepuzzle(puzzle);
+  const [solution, setSolution] = useState(() => solvepuzzle(puzzle));
   const difficulty = makepuzzle(puzzle, 4);
-  const numberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const numberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ""];
 
   const [fieldId, setFieldId] = useState(-1);
   const [numberId, setNumberId] = useState(-1);
-  const [number, setNumber] = useState(null);
   const [fieldClicked, setFieldClicked] = useState(false);
   const [numberClicked, setNumberClicked] = useState(false);
 
+  useEffect(() => {
+    /* const addOnePuzzle = puzzle.map((puzzle) => {
+      if (puzzle !== null) {
+        puzzle = puzzle + 1;
+        return puzzle;
+      }
+    });
+    setPuzzle(addOnePuzzle); */
+    const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
+      if (puzzle !== null) {
+        puzzle = puzzle + 1;
+        return puzzle;
+      }
+    });
+    setPuzzleCopy(addOnePuzzleCopy);
+    const addOneSolution = solution.map((solution) => {
+      if (solution !== null) {
+        solution = solution + 1;
+        return solution;
+      }
+    });
+    setSolution(addOneSolution);
+  }, []);
+
+  /* const compareArrays = (a, b) =>
+    a.length === b.length && a.every((element, index) => element === b[index]); */
+
+  // console.log(compareArrays(puzzle, puzzleCopy));
+
   const Field = () => {
-    const handleButtonFieldClick = (id, field) => {
-      if (field !== 0) {
+    const handleButtonFieldClick = (id, buttonField) => {
+      if (buttonField !== 0) {
         setFieldId(id);
         setFieldClicked(true);
         setNumberClicked(false);
@@ -34,41 +62,43 @@ const Sudoku = () => {
                 key={i}
                 className={[
                   "sdk-field",
-                  field !== null ? "field-white" : "field-grey",
+                  field !== null ? "field-yellow" : "field-grey",
                 ].join(" ")}
-                // onClick={() => handleFieldClick(i)}
               >
-                <span>{field}</span>
+                <span>{field !== null ? field + 1 : null}</span>
               </button>
             </>
           ))}
         </div>
         <div className="sdk-button-field-container">
-          {puzzleCopy.map((field, i) => (
+          {puzzleCopy.map((buttonField, i) => (
             <>
               <button
                 key={i + 100}
-                className="sdk-button-field"
-                onClick={() => handleButtonFieldClick(i, field)}
+                className={[
+                  "sdk-button-field",
+                  puzzle[i] === 0 && "field-yellow",
+                ].join(" ")}
+                onClick={() => handleButtonFieldClick(i, buttonField)}
               >
-                <span>{field}</span>
+                <span>{!puzzle[i] && puzzleCopy[i]}</span>
               </button>
             </>
           ))}
         </div>
         <div className="sdk-fake-field-container">
-          {puzzle.map((field, i) => (
+          {puzzle.map((fakeField, i) => (
             <>
               <div
                 key={i + 200}
                 className={[
                   "sdk-fake-field",
-                  i === fieldId ? "field-yellow" : "button-field-grey",
+                  i === fieldId ? "button-field-white" : "button-field-grey",
                   // fieldClicked ? "visible" : "hidden",
                   // numberClicked ? "hidden" : "visible",
                 ].join(" ")}
               >
-                {i === fieldId && field === null ? <NumberPad /> : null}
+                {i === fieldId && fakeField === null ? <NumberPad /> : null}
               </div>
             </>
           ))}
@@ -83,17 +113,16 @@ const Sudoku = () => {
   };
 
   const NumberPad = () => {
-    const handleNumberClick = (e, id, number) => {
+    const handleNumberClick = (id, number) => {
       setNumberId(id);
-      setNumber(number);
       setFieldClicked(false);
       setNumberClicked(true);
       const newPuzzleCopy = [...puzzleCopy];
       newPuzzleCopy[fieldId] = number;
       setPuzzleCopy(newPuzzleCopy);
-      console.log("NumberId: " + id);
-      console.log(number);
-      console.log(e);
+      // console.log("NumberId: " + id);
+      // console.log(number);
+      // console.log(e);
     };
     return (
       <div
@@ -107,11 +136,8 @@ const Sudoku = () => {
           {numberPad.map((number, i) => (
             <button
               key={i + 300}
-              className={[
-                "sdk-number",
-                i === numberId ? "field-white" : "field-yellow",
-              ].join(" ")}
-              onClick={(e) => handleNumberClick(e, i, number)}
+              className="sdk-number"
+              onClick={(e) => handleNumberClick(i, number)}
             >
               <span>{number}</span>
             </button>
