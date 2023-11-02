@@ -19,13 +19,6 @@ const Sudoku = () => {
   );
 
   useEffect(() => {
-    /* const addOnePuzzle = puzzle.map((puzzle) => {
-      if (puzzle !== null) {
-        puzzle = puzzle + 1;
-        return puzzle;
-      }
-    });
-    setPuzzle(addOnePuzzle); */
     const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
       if (puzzle !== null) {
         puzzle = puzzle + 1;
@@ -33,7 +26,6 @@ const Sudoku = () => {
       }
     });
     setPuzzleCopy(addOnePuzzleCopy);
-    console.log(puzzleCopy);
     const addOneSolution = solution.map((solution) => {
       if (solution !== null) {
         solution = solution + 1;
@@ -41,18 +33,18 @@ const Sudoku = () => {
       }
     });
     setSolution(addOneSolution);
-    console.log(solution);
   }, []);
 
   const compareArrays = (a, b) =>
     a.length === b.length && a.every((element, index) => element === b[index]);
 
-  console.log(compareArrays(puzzleCopy, solution));
-
   let status;
   if (compareArrays(puzzleCopy, solution)) {
     status = "You won!";
   }
+
+  // console.log(puzzleCopy);
+  // console.log(solution);
 
   const Field = () => {
     const handleButtonFieldClick = (id, buttonField) => {
