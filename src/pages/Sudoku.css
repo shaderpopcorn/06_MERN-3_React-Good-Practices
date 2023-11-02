@@ -6,12 +6,19 @@
 }
 
 .sdk-puzzle-field-container,
+.sdk-remember-field-container,
 .sdk-button-field-container,
 .sdk-fake-field-container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+}
+
+.sdk-remember-field-container {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .sdk-button-field-container {
@@ -35,6 +42,24 @@
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
+}
+
+.sdk-remember-field {
+  width: 30px;
+  height: 30px;
+  margin: 0.175rem;
+  background-color: transparent;
+
+  /* border: 1px solid var(--darkGreyLighter); */
+  /* border-radius: 0.25rem; */
+  border: none;
+}
+
+.sdk-remember-field span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  color: var(--offWhite);
 }
 
 .sdk-button-field {

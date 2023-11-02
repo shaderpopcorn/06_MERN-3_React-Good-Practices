@@ -8,15 +8,15 @@ const Sudoku = () => {
   const [puzzleCopy, setPuzzleCopy] = useState(puzzle);
   const [solution, setSolution] = useState(() => solvepuzzle(puzzle));
   const difficulty = makepuzzle(puzzle, 4);
-  const numberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "", "S"];
+  const numberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "R", null, "S"];
 
   const [fieldId, setFieldId] = useState(-1);
-  const [numberId, setNumberId] = useState(-1);
+  const [number, setNumber] = useState(-1);
   const [fieldClicked, setFieldClicked] = useState(false);
   const [numberClicked, setNumberClicked] = useState(false);
-  const [puzzleRememberCopy, setPuzzleRememberCopy] = useState(
-    Array(81).fill([])
-  );
+  const [sClicked, setSClicked] = useState(false);
+  const [rClicked, setRClicked] = useState(false);
+  const [remember, setRemember] = useState([[]]);
 
   useEffect(() => {
     const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
@@ -52,6 +52,8 @@ const Sudoku = () => {
         setFieldId(id);
         setFieldClicked(true);
         setNumberClicked(false);
+        setSClicked(false);
+        setRClicked(false);
       }
     };
 
@@ -72,6 +74,18 @@ const Sudoku = () => {
             </>
           ))}
         </div>
+        {
+          <div className="sdk-remember-field-container">
+            {puzzle.map((field, i) => (
+              <>
+                <button key={i} className={["sdk-remember-field"].join(" ")}>
+                  <span>{field === null ? "0123" : null}</span>
+                  <br />
+                </button>
+              </>
+            ))}
+          </div>
+        }
         <div className="sdk-button-field-container">
           {puzzleCopy.map((buttonField, i) => (
             <>
@@ -112,21 +126,46 @@ const Sudoku = () => {
     );
   };
 
+  console.log(remember);
+  console.log(puzzleCopy);
+
   const NumberPad = () => {
-    const handleNumberClick = (id, number) => {
-      setNumberId(id);
-      setFieldClicked(false);
-      setNumberClicked(true);
-      const newPuzzleCopy = [...puzzleCopy];
-      newPuzzleCopy[fieldId] = Number(number);
-      setPuzzleCopy(newPuzzleCopy);
+    setFieldClicked(false);
+    setNumberClicked(true);
+    const handleNumberClick = (id, num) => {
+      if (
+        num === 1 ||
+        num === 2 ||
+        num === 3 ||
+        num === 4 ||
+        num === 5 ||
+        num === 6 ||
+        num === 7 ||
+        num === 8 ||
+        num === 9
+      ) {
+        setNumber(num);
+      } else if (num === "S") {
+        const newPuzzleCopy = [...puzzleCopy];
+        newPuzzleCopy[fieldId] = number;
+        setPuzzleCopy(newPuzzleCopy);
+
+        setSClicked(true);
+      } else if (num === "R") {
+        setRemember(num);
+        /* setFieldClicked(false);
+        setNumberClicked(true); */
+        setRClicked(true);
+      }
     };
     return (
       <div
         className={[
           "sdk-number-card",
           fieldClicked ? "visible" : "hidden",
-          numberClicked ? "hidden" : "visible",
+          // numberClicked ? "hidden" : "visible",
+          rClicked ? "hidden" : "visible",
+          sClicked ? "hidden" : "visible",
         ].join(" ")}
       >
         <div className="sdk-number-container">
