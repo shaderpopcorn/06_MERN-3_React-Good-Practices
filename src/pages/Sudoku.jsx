@@ -8,12 +8,15 @@ const Sudoku = () => {
   const [puzzleCopy, setPuzzleCopy] = useState(puzzle);
   const [solution, setSolution] = useState(() => solvepuzzle(puzzle));
   const difficulty = makepuzzle(puzzle, 4);
-  const numberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", ""];
+  const numberPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "", "S"];
 
   const [fieldId, setFieldId] = useState(-1);
   const [numberId, setNumberId] = useState(-1);
   const [fieldClicked, setFieldClicked] = useState(false);
   const [numberClicked, setNumberClicked] = useState(false);
+  const [puzzleRememberCopy, setPuzzleRememberCopy] = useState(
+    Array(81).fill([])
+  );
 
   useEffect(() => {
     /* const addOnePuzzle = puzzle.map((puzzle) => {
@@ -30,6 +33,7 @@ const Sudoku = () => {
       }
     });
     setPuzzleCopy(addOnePuzzleCopy);
+    console.log(puzzleCopy);
     const addOneSolution = solution.map((solution) => {
       if (solution !== null) {
         solution = solution + 1;
@@ -37,12 +41,18 @@ const Sudoku = () => {
       }
     });
     setSolution(addOneSolution);
+    console.log(solution);
   }, []);
 
-  /* const compareArrays = (a, b) =>
-    a.length === b.length && a.every((element, index) => element === b[index]); */
+  const compareArrays = (a, b) =>
+    a.length === b.length && a.every((element, index) => element === b[index]);
 
-  // console.log(compareArrays(puzzle, puzzleCopy));
+  console.log(compareArrays(puzzleCopy, solution));
+
+  let status;
+  if (compareArrays(puzzleCopy, solution)) {
+    status = "You won!";
+  }
 
   const Field = () => {
     const handleButtonFieldClick = (id, buttonField) => {
@@ -94,8 +104,6 @@ const Sudoku = () => {
                 className={[
                   "sdk-fake-field",
                   i === fieldId ? "button-field-white" : "button-field-grey",
-                  // fieldClicked ? "visible" : "hidden",
-                  // numberClicked ? "hidden" : "visible",
                 ].join(" ")}
               >
                 {i === fieldId && fakeField === null ? <NumberPad /> : null}
@@ -118,16 +126,13 @@ const Sudoku = () => {
       setFieldClicked(false);
       setNumberClicked(true);
       const newPuzzleCopy = [...puzzleCopy];
-      newPuzzleCopy[fieldId] = number;
+      newPuzzleCopy[fieldId] = Number(number);
       setPuzzleCopy(newPuzzleCopy);
-      // console.log("NumberId: " + id);
-      // console.log(number);
-      // console.log(e);
     };
     return (
       <div
         className={[
-          "sdk-popup-card",
+          "sdk-number-card",
           fieldClicked ? "visible" : "hidden",
           numberClicked ? "hidden" : "visible",
         ].join(" ")}
@@ -149,7 +154,7 @@ const Sudoku = () => {
 
   return (
     <>
-      <GameBoard headline={"SUDOKU"}>
+      <GameBoard status={status} headline={"SUDOKU"}>
         <Field />
       </GameBoard>
     </>
