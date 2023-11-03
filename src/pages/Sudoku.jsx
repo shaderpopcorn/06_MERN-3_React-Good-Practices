@@ -11,12 +11,15 @@ const Sudoku = () => {
   const numberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, "R", null, "S"];
 
   const [fieldId, setFieldId] = useState(-1);
-  const [number, setNumber] = useState(-1);
+  const [number, setNumber] = useState();
   const [fieldClicked, setFieldClicked] = useState(false);
   const [numberClicked, setNumberClicked] = useState(false);
   const [sClicked, setSClicked] = useState(false);
   const [rClicked, setRClicked] = useState(false);
-  const [remember, setRemember] = useState([[]]);
+  const [memo, setMemo] = useState(false);
+  const [set, setSet] = useState(false);
+  const [remember, setRemember] = useState([]);
+  const [rememberArray, setRememberArray] = useState(Array(81).fill(null));
 
   useEffect(() => {
     const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
@@ -48,17 +51,26 @@ const Sudoku = () => {
 
   const Field = () => {
     const handleButtonFieldClick = (id, buttonField) => {
-      if (buttonField !== 0) {
-        setFieldId(id);
-        setFieldClicked(true);
-        setNumberClicked(false);
-        setSClicked(false);
-        setRClicked(false);
-      }
+      setFieldId(id);
+      setFieldClicked(true);
+      setNumberClicked(false);
+      setSClicked(false);
+      setRClicked(false);
+      console.log("field clicked");
     };
 
     return (
       <div className="sdk-container">
+        <div className="sdk-remember-field-container">
+          {rememberArray.map((field, i) => (
+            <>
+              <button key={i} className={["sdk-remember-field"].join(" ")}>
+                <span>{rememberArray[i]}</span>
+                <br />
+              </button>
+            </>
+          ))}
+        </div>
         <div className="sdk-puzzle-field-container">
           {puzzle.map((field, i) => (
             <>
@@ -74,18 +86,6 @@ const Sudoku = () => {
             </>
           ))}
         </div>
-        {
-          <div className="sdk-remember-field-container">
-            {puzzle.map((field, i) => (
-              <>
-                <button key={i} className={["sdk-remember-field"].join(" ")}>
-                  <span>{field === null ? "0123" : null}</span>
-                  <br />
-                </button>
-              </>
-            ))}
-          </div>
-        }
         <div className="sdk-button-field-container">
           {puzzleCopy.map((buttonField, i) => (
             <>
@@ -112,7 +112,7 @@ const Sudoku = () => {
                   i === fieldId ? "button-field-white" : "button-field-grey",
                 ].join(" ")}
               >
-                {i === fieldId && fakeField === null ? <NumberPad /> : null}
+                {i === fieldId ? <NumberPad /> : null}
               </div>
             </>
           ))}
@@ -126,37 +126,32 @@ const Sudoku = () => {
     );
   };
 
-  console.log(remember);
   console.log(puzzleCopy);
+  console.log(remember);
 
   const NumberPad = () => {
-    setFieldClicked(false);
-    setNumberClicked(true);
+    // setFieldClicked(false);
+    // setNumberClicked(true);
     const handleNumberClick = (id, num) => {
-      if (
-        num === 1 ||
-        num === 2 ||
-        num === 3 ||
-        num === 4 ||
-        num === 5 ||
-        num === 6 ||
-        num === 7 ||
-        num === 8 ||
-        num === 9
-      ) {
-        setNumber(num);
-      } else if (num === "S") {
+      if (set) {
         const newPuzzleCopy = [...puzzleCopy];
         newPuzzleCopy[fieldId] = number;
         setPuzzleCopy(newPuzzleCopy);
-
         setSClicked(true);
-      } else if (num === "R") {
-        setRemember(num);
-        /* setFieldClicked(false);
-        setNumberClicked(true); */
-        setRClicked(true);
+      } else if (memo) {
+        const newRememberArray = [...rememberArray];
+        newRememberArray[fieldId] = remember;
+        setRememberArray(newRememberArray);
       }
+
+      if (tick) {
+        setNumber(num);
+        setRemember([...remember, number]);
+      }
+
+      // setFieldClicked(false);
+      // setNumberClicked(true);
+      // setRClicked(true);
     };
     return (
       <div
@@ -164,11 +159,13 @@ const Sudoku = () => {
           "sdk-number-card",
           fieldClicked ? "visible" : "hidden",
           // numberClicked ? "hidden" : "visible",
-          rClicked ? "hidden" : "visible",
-          sClicked ? "hidden" : "visible",
+          // rClicked ? "hidden" : "visible",
+          // sClicked ? "hidden" : "visible",
         ].join(" ")}
       >
         <div className="sdk-number-container">
+          <button onClick={() => setMemo(true)}>Memo</button>
+          <button onClick={() => setSet(true)}>Set</button>
           {numberPad.map((number, i) => (
             <button
               key={i + 300}
