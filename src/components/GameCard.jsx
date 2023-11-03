@@ -1,16 +1,9 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./GameCard.css";
 
 const GameCard = ({ game }) => {
-  console.log(game.imageUrl);
   return (
-    <Link
-      className="game-link"
-      to={game.pageUrl}
-      onClick={() => {
-        // fetchContext.setShowInputWeather(false);
-      }}
-    >
+    <Link className="game-link" to={game.pageUrl}>
       <div className="image-container">
         <img
           rel="img"
@@ -20,7 +13,7 @@ const GameCard = ({ game }) => {
           alt="tictactoe image"
         />
       </div>
-      <h3>{game.name}</h3>
+      <h3 className="game-name">{game.name}</h3>
     </Link>
   );
 };

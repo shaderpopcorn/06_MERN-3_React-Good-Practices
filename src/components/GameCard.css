@@ -2,19 +2,25 @@
   margin: 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 200px;
+  width: 300px;
+  height: 400px;
   border-radius: 0.5rem;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
 
 .image-container {
-  height: 100px;
+  height: 250px;
 }
 
 .image-container > img {
   height: 100%;
+}
+
+.game-name {
+  margin-top: 2rem;
+  font-size: 2rem;
+  color: var(--offWhite);
 }

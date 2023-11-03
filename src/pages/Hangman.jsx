@@ -317,32 +317,6 @@ const Hangman = () => {
           </svg>
         );
         break;
-      // case 12:
-      //   return (
-      //     <svg
-      //       viewBox="-7 0 100 100"
-      //       stroke="#ffd200"
-      //       strokeWidth="2"
-      //       strokeLinecap="round"
-      //       fill="none"
-      //       xmlns="http://www.w3.org/2000/svg"
-      //     >
-      //       <line x1="10" y1="80" x2="30" y2="80" />
-      //       <line x1="20" y1="80" x2="20" y2="20" />
-      //       <line x1="20" y1="20" x2="60" y2="20" />
-      //       <line x1="20" y1="40" x2="40" y2="20" />
-      //       <line x1="60" y1="20" x2="60" y2="30" />
-      //       <circle cx="60" cy="35" r="5" />
-      //       <line x1="60" y1="40" x2="60" y2="60" />
-      //       <line x1="50" y1="50" x2="60" y2="45" />
-      //       <line x1="60" y1="45" x2="70" y2="50" />
-      //       <line x1="55" y1="70" x2="60" y2="60" />
-      //       <line x1="60" y1="60" x2="65" y2="70" />
-      //       <line x1="3" y1="90" x2="83" y2="10" />
-      //       <line x1="3" y1="10" x2="83" y2="90" />
-      //     </svg>
-      //   );
-      //   break;
       default:
         break;
     }
@@ -350,7 +324,25 @@ const Hangman = () => {
 
   return (
     <>
-      <GameBoard status={status} headline={"HANGMAN"} handleReset={handleReset}>
+      <GameBoard
+        status={status}
+        headline={
+          <p className="headline">
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+            <span className="text-yellow">Hangman</span>
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+            <span className="text-yellow">Hangman</span>
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+            <span className="text-yellow">Hangman</span>
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+            <span className="text-yellow">Hangman</span>
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+            <span className="text-yellow">Hangman</span>
+            HangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangmanHangman
+          </p>
+        }
+        handleReset={handleReset}
+      >
         <div className="hm-game-container">
           <div className="hm-picture">{drawGallow(incorrectGuesses)}</div>
           <p

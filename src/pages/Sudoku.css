@@ -5,8 +5,8 @@
   position: relative;
 }
 
-.sdk-puzzle-field-container,
 .sdk-remember-field-container,
+.sdk-puzzle-field-container,
 .sdk-button-field-container,
 .sdk-fake-field-container {
   display: flex;
@@ -18,7 +18,6 @@
 .sdk-remember-field-container {
   position: absolute;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .sdk-button-field-container {
@@ -29,74 +28,57 @@
   position: absolute;
 }
 
-.sdk-field {
+.sdk-remember-field,
+.sdk-puzzle-field,
+.sdk-button-field,
+.sdk-fake-field {
   width: 30px;
   height: 30px;
   margin: 0.175rem;
   background-color: transparent;
-  border: 1px solid var(--darkGreyLighter);
-  border-radius: 0.25rem;
 }
 
-.sdk-field span {
+.sdk-remember-field span,
+.sdk-puzzle-field span,
+.sdk-button-field span,
+.sdk-fake-field span {
   position: absolute;
   transform: translate(-50%, -50%);
   font-size: 1.5rem;
 }
 
 .sdk-remember-field {
-  width: 30px;
-  height: 30px;
-  margin: 0.175rem;
-  background-color: transparent;
   border: none;
 }
 
+.sdk-puzzle-field {
+  border: 1px solid var(--darkGreyLighter);
+  border-radius: 0.25rem;
+}
+
+.sdk-button-field {
+  border: none;
+}
+
+.sdk-fake-field {
+  border: 1px solid var(--darkGreyLighter);
+  border-radius: 0.25rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.sdk-puzzle-field span,
+.sdk-button-field span {
+  font-size: 1.5rem;
+}
+
 .sdk-remember-field span {
-  position: absolute;
-  transform: translate(-50%, -50%);
   font-size: 0.7rem;
   color: var(--offWhite);
 }
 
-.sdk-button-field {
-  width: 30px;
-  height: 30px;
-  margin: 0.175rem;
-  background-color: transparent;
-  border: none;
-}
-
-.sdk-button-field span {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-}
-
-.sdk-fake-field {
-  width: 30px;
-  height: 30px;
-  margin: 0.175rem;
-  background-color: transparent;
-  border: 1px solid var(--darkGreyLighter);
-  border-radius: 0.25rem;
-  z-index: 1;
-}
-
-.field-grey {
-  color: var(--offWhite);
-}
-
-.button-field-grey {
-  visibility: hidden;
-}
-
 .field-yellow {
   color: var(--yellow);
-}
-
-.button-field-yellow {
-  border: 1px solid var(--yellow);
 }
 
 .field-white {
@@ -105,6 +87,14 @@
 
 .button-field-white {
   border: 1px solid var(--offWhite);
+}
+
+.button-field-yellow {
+  border: 1px solid var(--yellow);
+}
+
+.button-field-hidden {
+  visibility: hidden;
 }
 
 .sdk-divider-h1,
@@ -154,10 +144,41 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
+  pointer-events: all;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.sdk-button-container {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sdk-button-container button {
+  width: 75px;
+  height: 50px;
+  margin: 0.125rem;
+  background-color: transparent;
+  border: 1px solid var(--darkGreyLighter);
+  border-radius: 0.25rem;
+}
+
+.none {
+  display: none;
+}
+
+.flex {
+  display: flex;
 }
 
 .sdk-number-container {
-  display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -167,7 +188,6 @@
 .sdk-number {
   width: 25px;
   height: 25px;
-  color: var(--white);
   border: 1px solid var(--darkGreyLighter);
   background-color: transparent;
   border-radius: 0.25rem;
@@ -179,10 +199,20 @@
   font-size: 1rem;
 }
 
-.visible {
-  visibility: visible;
+.button-back,
+.button-confirm {
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border: 1px solid var(--darkGreyLighter);
+  border-radius: 0.25rem;
 }
 
-.hidden {
-  visibility: hidden;
+.headline {
+  font-size: 1rem;
+  color: var(--darkGreyLighter);
+}
+
+.text-yellow {
+  color: var(--yellow);
 }

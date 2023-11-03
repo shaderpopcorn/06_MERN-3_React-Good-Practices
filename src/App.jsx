@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import FetchContext from "./context/fetch-context";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import TicTacToe from "./pages/TicTacToe";
@@ -8,21 +7,11 @@ import Sudoku from "./pages/Sudoku";
 import "./App.css";
 
 function App() {
-  const fetchContext = {};
   return (
     <>
-      {/* <FetchContext.Provider value={fetchContext}> */}
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout
-              // handleLocalWeatherCurrent={handleLocalWeatherCurrent}
-              // handleLocalWeatherForecast={handleLocalWeatherForecast}
-              />
-            }
-          >
+          <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/tictactoe" element={<TicTacToe />} />
             <Route path="/hangman" element={<Hangman />} />
@@ -30,7 +19,6 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* </FetchContext.Provider> */}
     </>
   );
 }

@@ -1,44 +1,21 @@
-import test from "../assets/images/test.png";
+import tictactoe from "../assets/images/tictactoe.svg";
+import hangman from "../assets/images/hangman.svg";
+import sudoku from "../assets/images/sudoku.svg";
 
 export const GAMES = [
   {
     pageUrl: "/tictactoe",
-    imageUrl: test,
+    imageUrl: tictactoe,
     name: "TicTacToe",
   },
   {
     pageUrl: "/hangman",
-    imageUrl: test,
+    imageUrl: hangman,
     name: "Hangman",
   },
   {
     pageUrl: "/sudoku",
-    imageUrl: test,
+    imageUrl: sudoku,
     name: "Sudoku",
-  },
-  {
-    pageUrl: "/memory",
-    imageUrl: test,
-    name: "Memory",
-  },
-  {
-    pageUrl: "/tictactoe",
-    imageUrl: test,
-    name: "TicTacToe",
-  },
-  {
-    pageUrl: "/hangman",
-    imageUrl: test,
-    name: "Hangman",
-  },
-  {
-    pageUrl: "/solitaire",
-    imageUrl: test,
-    name: "Solitaire",
-  },
-  {
-    pageUrl: "/memory",
-    imageUrl: test,
-    name: "Memory",
   },
 ];

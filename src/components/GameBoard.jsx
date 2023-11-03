@@ -4,17 +4,14 @@ import "./GameBoard.css";
 const GameBoard = ({ children, headline, status, handleReset }) => {
   return (
     <div className="container">
-      <div className="background">
-        <p className="headline-top">{headline}</p>
-        <p className="headline-bottom">{headline}</p>
-      </div>
+      <div className="background">{headline}</div>
       <div className="gameboard-container">
         <div className="gameboard-board">{children}</div>
         <div className="gameboard-reset">
           <span className="statusInfo">{status}</span>
-          {/*  <button className="resetButton" onClick={handleReset}>
+          <button className="resetButton" onClick={handleReset}>
             RESET GAME
-          </button> */}
+          </button>
         </div>
       </div>
     </div>
