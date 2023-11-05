@@ -10,7 +10,7 @@ const GameBoard = ({ children, headline, status, handleReset }) => {
         <div className="gameboard-reset">
           <span className="statusInfo">{status}</span>
           <button className="resetButton" onClick={handleReset}>
-            RESET GAME
+            START GAME
           </button>
         </div>
       </div>

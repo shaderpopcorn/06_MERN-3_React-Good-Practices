@@ -7,7 +7,8 @@ const Sudoku = () => {
   const [puzzle, setPuzzle] = useState(() => makepuzzle());
   const [puzzleCopy, setPuzzleCopy] = useState(puzzle);
   const [solution, setSolution] = useState(() => solvepuzzle(puzzle));
-  const difficulty = makepuzzle(puzzle, 4);
+  // const difficulty = makepuzzle(puzzle, 4);
+  const [difficulty, setDifficulty] = useState([]);
   const numberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, null];
   const [fieldClicked, setFieldClicked] = useState(false);
 
@@ -22,6 +23,8 @@ const Sudoku = () => {
 
   const [selectVisible, setSelectVisible] = useState("flex");
   const [numVisible, setNumVisible] = useState("none");
+  const [level, setLevel] = useState("easy");
+  const [selectLevelVisibility, setSelectLevelVisibility] = useState("flex");
 
   useEffect(() => {
     const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
@@ -58,6 +61,8 @@ const Sudoku = () => {
     });
     setFieldClicked(false);
     setFieldId(-1);
+    status = "";
+    setSelectLevelVisibility("flex");
   };
 
   const Field = () => {
@@ -73,6 +78,28 @@ const Sudoku = () => {
       setRemember([]);
       setSelectVisible("flex");
       setNumVisible("none");
+    };
+
+    const handleRadio = (e) => {
+      switch (e.target.value) {
+        case "easy":
+          setLevel(1);
+          break;
+        case "medium":
+          setLevel(2);
+          break;
+        case "hard":
+          setLevel(3);
+          break;
+        default:
+          break;
+      }
+    };
+
+    const handleRadioSubmit = (e) => {
+      e.preventDefault();
+      setDifficulty(() => makepuzzle(puzzle, level));
+      setSelectLevelVisibility("none");
     };
 
     return (
@@ -95,6 +122,7 @@ const Sudoku = () => {
                 className={[
                   "sdk-puzzle-field",
                   puzzle[i] !== null && "field-yellow",
+                  (status = "You won!" && "field-yellow"),
                 ].join(" ")}
               >
                 <span>{puzzle[i] !== null ? puzzle[i] + 1 : null}</span>
@@ -137,6 +165,58 @@ const Sudoku = () => {
         <hr className="sdk-divider-h2" />
         <hr className="sdk-divider-v1" />
         <hr className="sdk-divider-v2" />
+        <div className={["selectLevel", selectLevelVisibility].join(" ")}>
+          <h3>SELECT LEVEL</h3>
+          <form class="boxed">
+            <div className="radio-button-container">
+              <input
+                type="radio"
+                id="easy"
+                name="level"
+                value="easy"
+                onClick={handleRadio}
+                // defaultChecked
+              />
+              <label
+                for="easy"
+                className={level === 1 ? "checked" : "unchecked"}
+              >
+                EASY
+              </label>
+              <input
+                type="radio"
+                id="medium"
+                name="level"
+                value="medium"
+                onClick={handleRadio}
+              />
+
+              <label
+                for="medium"
+                className={level === 2 ? "checked" : "unchecked"}
+              >
+                MEDIUM
+              </label>
+              <input
+                type="radio"
+                id="hard"
+                name="level"
+                value="hard"
+                onClick={handleRadio}
+              />
+
+              <label
+                for="hard"
+                className={level === 3 ? "checked" : "unchecked"}
+              >
+                HARD
+              </label>
+            </div>
+            <div className="submit-button-container">
+              <input type="submit" value="SUBMIT" onClick={handleRadioSubmit} />
+            </div>
+          </form>
+        </div>
       </div>
     );
   };
