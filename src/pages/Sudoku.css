@@ -75,7 +75,7 @@
 .sdk-remember-field span {
   font-size: 0.7rem;
   color: var(--offWhite);
-  transform: translate(3px, 0px);
+  transform: translate(2px, 0px);
 }
 
 .field-yellow {
