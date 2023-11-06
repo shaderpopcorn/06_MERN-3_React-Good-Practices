@@ -2,6 +2,11 @@
   transform: translate(-15%, -10%);
 }
 
+.iconXSmall {
+  transform: translate(0%, 5%);
+  pointer-events: none;
+}
+
 .board-row {
   display: flex;
 }
@@ -41,4 +46,102 @@
 
 .oYellow span svg {
   stroke: var(--yellow);
+}
+
+.selectPlayer {
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  z-index: 3;
+  background-color: var(--darkGrey);
+  border-radius: 0.5rem;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+}
+
+.selectPlayer h3 {
+  margin: 1rem;
+}
+
+.ttt-boxed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ttt-radio-button-container {
+  display: flex;
+}
+
+.ttt-submit-button-container {
+  margin-top: 0.5rem;
+}
+
+.ttt-submit-button-container input,
+.ttt-boxed label {
+  padding: 0.25rem;
+  margin: 0 0.5rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  font-family: "Comfortaa", cursive;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+/* .ttt-radio-button-container input:checked {
+  fill: var(--yellow);
+  stroke: var(--yellow);
+} */
+
+.ttt-boxed label {
+  width: 50px;
+  height: 50px;
+  fill: var(--offWhite);
+  stroke: var(--offWhite);
+}
+
+.ttt-submit-button-container input {
+  width: 150px;
+  border: solid 2px var(--offWhite);
+  font-weight: 700;
+}
+
+.ttt-playerX:hover {
+  fill: var(--yellow);
+}
+
+:checked + .ttt-playerX svg {
+  fill: var(--yellow);
+}
+
+.ttt-playerO:hover {
+  stroke: var(--yellow);
+}
+
+:checked + .ttt-playerO svg {
+  stroke: var(--yellow);
+}
+
+.ttt-submit-button-container:hover input {
+  color: var(--yellow);
+  border: 2px solid var(--yellow);
+}
+
+.ttt-boxed input[type="radio"] {
+  display: none;
+}
+
+.icon-checked {
+  fill: var(--yellow);
+  stroke: var(--yellow);
+}
+
+.icon-unchecked {
+  fill: var(--offWhite);
+  stroke: var(--offWhite);
 }

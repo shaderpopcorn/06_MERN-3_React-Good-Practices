@@ -7,6 +7,7 @@ const TicTacToe = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [countClicks, setCountClicks] = useState(0);
+  const [selectPlayerVisibility, setSelectPlayerVisibility] = useState("flex");
   let winSquares = Array(9).fill(false);
 
   const iconX = (
@@ -15,7 +16,6 @@ const TicTacToe = () => {
       xmlns="http://www.w3.org/2000/svg"
       width="70"
       height="70"
-      // fill="white"
       stroke="none"
       viewBox="-5 -5 35 35"
     >
@@ -23,13 +23,31 @@ const TicTacToe = () => {
     </svg>
   );
   const iconO = (
+    <svg className="iconO" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="105" cy="50" r="20" strokeWidth="10" />
+    </svg>
+  );
+
+  const iconXSmall = (
     <svg
-      className="iconO"
+      className="iconXSmall"
+      xmlns="http://www.w3.org/2000/svg"
+      width="70"
+      height="70"
+      stroke="none"
+      viewBox="-5 10 35 35"
+    >
+      <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+    </svg>
+  );
+  const iconOSmall = (
+    <svg
+      className="iconOSmall"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      // stroke="white"
+      viewBox="-5 -4 35 35"
     >
-      <circle cx="105" cy="50" r="20" strokeWidth="10" />
+      <circle cx="12" cy="13" r="10" strokeWidth="5" />
     </svg>
   );
 
@@ -103,10 +121,31 @@ const TicTacToe = () => {
     status = "Its a Tie";
   }
 
+  const handleRadio = (e) => {
+    switch (e.target.value) {
+      case "x":
+        setXIsNext(true);
+        console.log("x is clicked");
+        break;
+      case "o":
+        setXIsNext(false);
+        console.log("o is clicked");
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleRadioSubmit = async (e) => {
+    e.preventDefault();
+    setSelectPlayerVisibility("none");
+  };
+
   const handleReset = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
     setCountClicks(0);
+    setSelectPlayerVisibility("flex");
   };
 
   return (
@@ -190,6 +229,37 @@ const TicTacToe = () => {
               onSquareClick={() => handleClick(8)}
             />
           </div>
+        </div>
+        <div className={["selectPlayer", selectPlayerVisibility].join(" ")}>
+          <h3>SELECT PLAYER</h3>
+          <form className="ttt-boxed">
+            <div className="ttt-radio-button-container">
+              <input
+                type="radio"
+                id="x"
+                name="player"
+                value="x"
+                onClick={handleRadio}
+                defaultChecked
+              />
+              <label htmlFor="x" className="ttt-playerX">
+                {iconXSmall}
+              </label>
+              <input
+                type="radio"
+                id="o"
+                name="player"
+                value="o"
+                onClick={handleRadio}
+              />
+              <label htmlFor="o" className="ttt-playerO">
+                {iconOSmall}
+              </label>
+            </div>
+            <div className="ttt-submit-button-container">
+              <input type="submit" value="SUBMIT" onClick={handleRadioSubmit} />
+            </div>
+          </form>
         </div>
       </GameBoard>
     </div>

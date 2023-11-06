@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import GameBoard from "../components/GameBoard";
-import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
+import { makepuzzle, solvepuzzle } from "sudoku";
 import "./Sudoku.css";
 
 const Sudoku = () => {
   const [puzzle, setPuzzle] = useState(() => makepuzzle());
-  const [puzzleCopy, setPuzzleCopy] = useState(puzzle);
-  const [solution, setSolution] = useState(() => solvepuzzle(puzzle));
-  // const difficulty = makepuzzle(puzzle, 4);
-  const [difficulty, setDifficulty] = useState([]);
+  const [difficulty, setDifficulty] = useState([null]);
+  const [difficultyCopy, setDifficultyCopy] = useState(difficulty);
+  const [solution, setSolution] = useState([]);
   const numberPad = [1, 2, 3, 4, 5, 6, 7, 8, 9, null];
   const [fieldClicked, setFieldClicked] = useState(false);
 
@@ -25,15 +24,18 @@ const Sudoku = () => {
   const [numVisible, setNumVisible] = useState("none");
   const [level, setLevel] = useState("easy");
   const [selectLevelVisibility, setSelectLevelVisibility] = useState("flex");
+  const [rememberVisibility, setRememberVisibility] = useState("none");
 
   useEffect(() => {
-    const addOnePuzzleCopy = puzzleCopy.map((puzzle) => {
-      if (puzzle !== null) {
-        puzzle = puzzle + 1;
-        return puzzle;
+    const addOneDifficultyCopy = difficultyCopy.map((difficulty) => {
+      if (difficulty !== null) {
+        difficulty = difficulty + 1;
+      } else {
+        difficulty = null;
       }
+      return difficulty;
     });
-    setPuzzleCopy(addOnePuzzleCopy);
+    setDifficultyCopy(addOneDifficultyCopy);
     const addOneSolution = solution.map((solution) => {
       if (solution !== null) {
         solution = solution + 1;
@@ -41,28 +43,60 @@ const Sudoku = () => {
       }
     });
     setSolution(addOneSolution);
-  }, [puzzle]);
+  }, [difficulty]);
+
+  /* console.log(difficultyCopy);
+  console.log(solution); */
 
   const compareArrays = (a, b) =>
     a.length === b.length && a.every((element, index) => element === b[index]);
 
   let status;
-  if (compareArrays(puzzleCopy, solution)) {
+  if (compareArrays(difficultyCopy, solution)) {
     status = "You won!";
   }
 
+  const handleRadio = (e) => {
+    switch (e.target.value) {
+      case "easy":
+        setLevel(1);
+        break;
+      case "medium":
+        setLevel(2);
+        break;
+      case "hard":
+        setLevel(3);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleRadioSubmit = async (e) => {
+    e.preventDefault();
+    setDifficulty(() => makepuzzle(puzzle, level));
+    setDifficultyCopy(difficulty);
+
+    await new Promise((resolve, reject) => {
+      resolve(makepuzzle(puzzle, level));
+    }).then((res) => {
+      setDifficulty(res);
+      setDifficultyCopy(res);
+      setSolution(() => solvepuzzle(res));
+    });
+    setSelectLevelVisibility("none");
+    setRememberVisibility("flex");
+  };
+
   const handleReset = async () => {
     setPuzzle([]);
-    await new Promise((resolve, reject) => {
-      resolve(makepuzzle());
-    }).then((res) => {
-      setPuzzle(res);
-      setPuzzleCopy(res);
-    });
+    setDifficulty([]);
+    setDifficultyCopy([]);
     setFieldClicked(false);
     setFieldId(-1);
     status = "";
     setSelectLevelVisibility("flex");
+    setRememberVisibility("none");
   };
 
   const Field = () => {
@@ -80,34 +114,15 @@ const Sudoku = () => {
       setNumVisible("none");
     };
 
-    const handleRadio = (e) => {
-      switch (e.target.value) {
-        case "easy":
-          setLevel(1);
-          break;
-        case "medium":
-          setLevel(2);
-          break;
-        case "hard":
-          setLevel(3);
-          break;
-        default:
-          break;
-      }
-    };
-
-    const handleRadioSubmit = (e) => {
-      e.preventDefault();
-      setDifficulty(() => makepuzzle(puzzle, level));
-      setSelectLevelVisibility("none");
-    };
-
     return (
       <div className="sdk-container">
         <div className="sdk-remember-field-container">
           {rememberArray.map((field, i) => (
             <>
-              <button key={i} className={["sdk-remember-field"].join(" ")}>
+              <button
+                key={i + 100}
+                className={["sdk-remember-field", rememberVisibility].join(" ")}
+              >
                 <span>{rememberArray[i]}</span>
                 <br />
               </button>
@@ -115,48 +130,48 @@ const Sudoku = () => {
           ))}
         </div>
         <div className="sdk-puzzle-field-container">
-          {puzzle.map((field, i) => (
+          {difficulty.map((field, i) => (
             <>
               <button
-                key={i}
+                key={i + 200}
                 className={[
                   "sdk-puzzle-field",
-                  puzzle[i] !== null && "field-yellow",
+                  difficulty[i] !== null && "field-yellow",
                   (status = "You won!" && "field-yellow"),
                 ].join(" ")}
               >
-                <span>{puzzle[i] !== null ? puzzle[i] + 1 : null}</span>
+                <span>{difficulty[i] !== null ? difficulty[i] + 1 : null}</span>
               </button>
             </>
           ))}
         </div>
         <div className="sdk-button-field-container">
-          {puzzleCopy.map((buttonField, i) => (
+          {difficultyCopy.map((buttonField, i) => (
             <>
               <button
-                key={i + 100}
+                key={i + 300}
                 className={[
                   "sdk-button-field",
-                  puzzle[i] === 0 && "field-yellow",
+                  difficulty[i] === 0 && "field-yellow",
                 ].join(" ")}
                 onClick={() => handleButtonFieldClick(i)}
               >
-                <span>{!puzzle[i] && puzzleCopy[i]}</span>
+                <span>{!difficulty[i] && difficultyCopy[i]}</span>
               </button>
             </>
           ))}
         </div>
         <div className="sdk-fake-field-container">
-          {puzzle.map((fakeField, i) => (
+          {difficulty.map((fakeField, i) => (
             <>
               <div
-                key={i + 200}
+                key={i + 400}
                 className={[
                   "sdk-fake-field",
                   i === fieldId ? "button-field-white" : "button-field-hidden",
                 ].join(" ")}
               >
-                {i === fieldId && puzzle[i] === null ? <NumberPad /> : null}
+                {i === fieldId && difficulty[i] === null ? <NumberPad /> : null}
               </div>
             </>
           ))}
@@ -167,18 +182,18 @@ const Sudoku = () => {
         <hr className="sdk-divider-v2" />
         <div className={["selectLevel", selectLevelVisibility].join(" ")}>
           <h3>SELECT LEVEL</h3>
-          <form class="boxed">
-            <div className="radio-button-container">
+          <form className="sdk-boxed">
+            <div className="sdk-radio-button-container">
               <input
                 type="radio"
                 id="easy"
                 name="level"
                 value="easy"
                 onClick={handleRadio}
-                // defaultChecked
+                defaultChecked
               />
               <label
-                for="easy"
+                htmlFor="easy"
                 className={level === 1 ? "checked" : "unchecked"}
               >
                 EASY
@@ -192,7 +207,7 @@ const Sudoku = () => {
               />
 
               <label
-                for="medium"
+                htmlFor="medium"
                 className={level === 2 ? "checked" : "unchecked"}
               >
                 MEDIUM
@@ -206,13 +221,13 @@ const Sudoku = () => {
               />
 
               <label
-                for="hard"
+                htmlFor="hard"
                 className={level === 3 ? "checked" : "unchecked"}
               >
                 HARD
               </label>
             </div>
-            <div className="submit-button-container">
+            <div className="sdk-submit-button-container">
               <input type="submit" value="SUBMIT" onClick={handleRadioSubmit} />
             </div>
           </form>
@@ -220,6 +235,9 @@ const Sudoku = () => {
       </div>
     );
   };
+
+  console.log(remember);
+  console.log(rememberArray);
 
   const NumberPad = () => {
     const handleNumberClick = (id, num) => {
@@ -234,9 +252,9 @@ const Sudoku = () => {
 
     const handleConfirmNumber = () => {
       if (set) {
-        const newPuzzleCopy = [...puzzleCopy];
-        newPuzzleCopy[fieldId] = number;
-        setPuzzleCopy(newPuzzleCopy);
+        const newDifficultyCopy = [...difficultyCopy];
+        newDifficultyCopy[fieldId] = number;
+        setDifficultyCopy(newDifficultyCopy);
         const newRememberArray = [...rememberArray];
         newRememberArray[fieldId] = [];
         setRememberArray(newRememberArray);
@@ -277,7 +295,7 @@ const Sudoku = () => {
         <div className={["sdk-number-container", numVisible].join(" ")}>
           {numberPad.map((number, i) => (
             <button
-              key={i + 300}
+              key={i + 500}
               className={[
                 "sdk-number",
                 i === numberId ? "field-yellow" : "field-white",

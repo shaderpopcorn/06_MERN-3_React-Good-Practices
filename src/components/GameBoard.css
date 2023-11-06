@@ -10,9 +10,13 @@
   transform: translate(0, 0%);
   width: 90vw;
   height: calc(100vh - 11rem);
-  /* text-wrap: wrap; */
   word-wrap: break-word;
   overflow: hidden;
+}
+
+.headline {
+  font-size: 1rem;
+  color: var(--darkGreyLighter);
 }
 
 .gameboard-container {
@@ -59,6 +63,7 @@
   border: 1px solid var(--offWhite);
   background-color: transparent;
   color: var(--offWhite);
+  font-family: "Comfortaa", cursive;
 }
 
 .resetButton:hover {

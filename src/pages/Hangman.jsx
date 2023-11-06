@@ -5,13 +5,17 @@ import "./Hangman.css";
 
 const Hangman = () => {
   const [word, setWord] = useState("");
-  const [showInput, setShowInput] = useState("input-show");
-  const [showAlphabet, setShowAlphabet] = useState("alphabet-hide");
   const [correctGuesses, setCorrectGuesses] = useState([]);
   const [incorrectGuesses, setIncorrectGuesses] = useState(0);
   const [correctHits, setCorrectHits] = useState(Array(26).fill(false));
   const [incorrectHits, setIncorrectHits] = useState(Array(26).fill(false));
   const [clickedId, setClickedId] = useState(-1);
+  const [notEmpty, setNotEmpty] = useState("none");
+  const [lettersOnly, setLettersOnly] = useState("none");
+  const [submitted, setSubmitted] = useState(false);
+  const [enterWordVisibility, setEnterWordVisibility] = useState("flex");
+  const [alphabetVisibility, setAlphabetVisibility] = useState("none");
+
   const SvgHalf = () => {
     return (
       <svg
@@ -77,8 +81,17 @@ const Hangman = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowAlphabet("alphabet-show");
-    setShowInput("input-hide");
+    if (word == "") {
+      setLettersOnly("none");
+      setNotEmpty("flex");
+    } else if (!/^[a-zA-Z]*$/g.test(word)) {
+      setLettersOnly("flex");
+      setNotEmpty("none");
+    } else {
+      setEnterWordVisibility("none");
+      setAlphabetVisibility("flex");
+      setSubmitted(true);
+    }
   };
 
   const hiddenWord = word
@@ -87,17 +100,19 @@ const Hangman = () => {
     .join(" ");
 
   let status;
-  if (!hiddenWord.includes("_")) status = "You won!";
-  else if (incorrectGuesses === 11) status = "You lost!";
+  if (!hiddenWord.includes("_") && word !== "") status = "You won!";
+  else if (incorrectGuesses === 11 && word.length !== "") status = "You lost!";
+  else if (word.length !== "" && !submitted) status = "Please enter a word!";
   else status = "Trials left: " + `${11 - incorrectGuesses}`;
 
   const handleReset = () => {
-    setShowInput("input-show");
-    setShowAlphabet("alphabet-hide");
     setCorrectGuesses([]);
     setIncorrectGuesses(0);
     setCorrectHits(Array(26).fill(false));
     setIncorrectHits(Array(26).fill(false));
+    setSubmitted(false);
+    setEnterWordVisibility("flex");
+    setAlphabetVisibility("none");
   };
 
   const drawGallow = (incorrectGuesses) => {
@@ -353,26 +368,35 @@ const Hangman = () => {
           >
             {hiddenWord}
           </p>
-          <div className="input-container">
-            <form className={showInput}>
-              <input
-                className="word-input"
-                type="text"
-                placeholder="TYPE WORD"
-                onChange={handleInput}
-              ></input>
-              <button
-                className="submit-button"
-                type="submit"
-                onClick={handleSubmit}
-              >
-                SUBMIT
-              </button>
-            </form>
-            <div className={showAlphabet}>
-              <Letters />
-            </div>
+          <div className={["alphabet", alphabetVisibility].join(" ")}>
+            <Letters />
           </div>
+        </div>
+        <div className={["input-container", enterWordVisibility].join(" ")}>
+          <h3>INPUT WORD</h3>
+          <h4 className={["notEntered", notEmpty].join(" ")}>
+            Please enter a word!
+          </h4>
+          <h4 className={["notEntered", lettersOnly].join(" ")}>
+            Only enter Letters, please!
+          </h4>
+          <form className="hm-boxed">
+            <input
+              className="word-input"
+              type="text"
+              placeholder="TYPE WORD"
+              maxlength="20"
+              required
+              onChange={handleInput}
+            ></input>
+            <button
+              className="submit-button"
+              type="submit"
+              onClick={handleSubmit}
+            >
+              SUBMIT
+            </button>
+          </form>
         </div>
       </GameBoard>
     </>

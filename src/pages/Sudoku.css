@@ -75,6 +75,7 @@
 .sdk-remember-field span {
   font-size: 0.7rem;
   color: var(--offWhite);
+  transform: translate(3px, 0px);
 }
 
 .field-yellow {
@@ -208,11 +209,6 @@
   border-radius: 0.25rem;
 }
 
-.headline {
-  font-size: 1rem;
-  color: var(--darkGreyLighter);
-}
-
 .text-yellow {
   color: var(--yellow);
 }
@@ -224,42 +220,65 @@
   z-index: 3;
   background-color: var(--darkGrey);
   border-radius: 0.5rem;
-  /* display: flex; */
   align-items: center;
   flex-direction: column;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
 }
 
 .selectLevel h3 {
   margin: 1rem;
 }
 
-.boxed {
+.sdk-boxed {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.radio-button-container {
+.sdk-radio-button-container {
   display: flex;
 }
 
-.submit-button-container input,
-.boxed label {
-  width: 90px;
-  padding: 0.5rem;
+.sdk-submit-button-container {
+  margin-top: 1rem;
+}
+
+.sdk-submit-button-container input,
+.sdk-boxed label {
+  padding: 0.25rem;
   margin: 0.25rem;
-  border: solid 1px var(--offWhite);
   border-radius: 0.25rem;
   background-color: transparent;
-  /* transition: all 0.3s; */
   display: flex;
   justify-content: center;
-  font-size: 1rem;
+  font-family: "Comfortaa", cursive;
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
-.boxed input[type="radio"] {
+.sdk-boxed label {
+  width: 70px;
+}
+
+.sdk-submit-button-container input {
+  width: 150px;
+  border: solid 2px var(--offWhite);
+  font-weight: 700;
+}
+
+.sdk-boxed label:hover {
+  color: var(--yellow);
+  border: 1px solid var(--yellow);
+}
+
+.sdk-submit-button-container input:hover {
+  color: var(--yellow);
+  border: 2px solid var(--yellow);
+}
+
+.sdk-boxed input[type="radio"] {
   display: none;
 }
 
