@@ -26,6 +26,10 @@ const Sudoku = () => {
   const [selectLevelVisibility, setSelectLevelVisibility] = useState("flex");
   const [rememberVisibility, setRememberVisibility] = useState("none");
 
+  const [solutionButtonVisibility, setSolutionButtonVisibility] =
+    useState("none");
+  const [solutionButtonClicked, setSolutionButtonClicked] = useState(false);
+
   useEffect(() => {
     const addOneDifficultyCopy = difficultyCopy.map((difficulty) => {
       if (difficulty !== null) {
@@ -45,15 +49,19 @@ const Sudoku = () => {
     setSolution(addOneSolution);
   }, [difficulty]);
 
-  /* console.log(difficultyCopy);
-  console.log(solution); */
+  console.log(difficultyCopy);
+  console.log(solution);
+  // console.log(remember);
+  // console.log(rememberArray);
 
   const compareArrays = (a, b) =>
     a.length === b.length && a.every((element, index) => element === b[index]);
 
+  console.log(solutionButtonClicked);
+
   let status;
   if (compareArrays(difficultyCopy, solution)) {
-    status = "You won!";
+    solutionButtonClicked ? (status = "") : (status = "You won!");
   }
 
   const handleRadio = (e) => {
@@ -76,6 +84,7 @@ const Sudoku = () => {
     e.preventDefault();
     setDifficulty(() => makepuzzle(puzzle, level));
     setDifficultyCopy(difficulty);
+    setSolutionButtonVisibility("flex");
 
     await new Promise((resolve, reject) => {
       resolve(makepuzzle(puzzle, level));
@@ -97,6 +106,13 @@ const Sudoku = () => {
     status = "";
     setSelectLevelVisibility("flex");
     setRememberVisibility("none");
+    setSolutionButtonVisibility("none");
+    setSolutionButtonClicked(false);
+  };
+
+  const handleShowSolution = () => {
+    setDifficultyCopy(solution);
+    setSolutionButtonClicked(true);
   };
 
   const Field = () => {
@@ -236,9 +252,6 @@ const Sudoku = () => {
     );
   };
 
-  console.log(remember);
-  console.log(rememberArray);
-
   const NumberPad = () => {
     const handleNumberClick = (id, num) => {
       setNumberId(id);
@@ -343,6 +356,12 @@ const Sudoku = () => {
         }
         handleReset={handleReset}
       >
+        <button
+          className={["solution-button", solutionButtonVisibility].join(" ")}
+          onClick={() => handleShowSolution()}
+        >
+          SOLUTION
+        </button>
         <Field />
       </GameBoard>
     </>

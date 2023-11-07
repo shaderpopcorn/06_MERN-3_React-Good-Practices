@@ -15,6 +15,7 @@ const Hangman = () => {
   const [submitted, setSubmitted] = useState(false);
   const [enterWordVisibility, setEnterWordVisibility] = useState("flex");
   const [alphabetVisibility, setAlphabetVisibility] = useState("none");
+  const [showSolutionVisibility, setShowSolutionVisibility] = useState("none");
 
   const SvgHalf = () => {
     return (
@@ -99,6 +100,8 @@ const Hangman = () => {
     .map((letter) => (correctGuesses.includes(letter) ? letter : "_"))
     .join(" ");
 
+  const solutionWord = word;
+
   let status;
   if (!hiddenWord.includes("_") && word !== "") status = "You won!";
   else if (incorrectGuesses === 11 && word.length !== "") status = "You lost!";
@@ -113,6 +116,7 @@ const Hangman = () => {
     setSubmitted(false);
     setEnterWordVisibility("flex");
     setAlphabetVisibility("none");
+    setShowSolutionVisibility("none");
   };
 
   const drawGallow = (incorrectGuesses) => {
@@ -366,7 +370,9 @@ const Hangman = () => {
               status === "You won!" ? "word-yellow" : "word-white",
             ].join(" ")}
           >
-            {hiddenWord}
+            {incorrectGuesses === 11 && word.length !== ""
+              ? solutionWord
+              : hiddenWord}
           </p>
           <div className={["alphabet", alphabetVisibility].join(" ")}>
             <Letters />

@@ -291,3 +291,21 @@
   border: solid 1px var(--offWhite);
   color: var(--offWhite);
 }
+
+.solution-button {
+  position: absolute;
+  transform: translate(0px, 215px);
+  margin: 0 0.5rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid var(--offWhite);
+  background-color: transparent;
+  color: var(--offWhite);
+  font-family: "Comfortaa", cursive;
+  z-index: 1;
+}
+
+.solution-button:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+}

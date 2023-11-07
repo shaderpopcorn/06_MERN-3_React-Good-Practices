@@ -29,7 +29,6 @@
 
 .input-container {
   position: absolute;
-  transform: translate(0, 0px);
   width: 300px;
   height: 150px;
   background-color: var(--darkGrey);
