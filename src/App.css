@@ -27,3 +27,45 @@ button {
 svg {
   user-select: none;
 }
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  transform: translate(0, 0%);
+  width: 90vw;
+  height: calc(100vh - 11rem);
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.background-home {
+  position: absolute;
+  transform: translate(0, 0%);
+  width: 90vw;
+  height: calc(100vh - 11rem);
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.headline {
+  font-size: 1rem;
+  color: var(--darkGreyLighter);
+}
+
+@media screen and (max-width: 701px) {
+  .background-home {
+    height: 97%;
+  }
+}
+
+@media screen and (max-width: 1053px) {
+  .background-home {
+    height: 98%;
+  }
+}

@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,7 +17,7 @@
 .headline {
   font-size: 1rem;
   color: var(--darkGreyLighter);
-}
+} */
 
 .gameboard-container {
   display: flex;
