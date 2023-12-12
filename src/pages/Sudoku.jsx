@@ -49,15 +49,13 @@ const Sudoku = () => {
     setSolution(addOneSolution);
   }, [difficulty]);
 
-  console.log(difficultyCopy);
-  console.log(solution);
+  // console.log(difficultyCopy);
+  // console.log(solution);
   // console.log(remember);
   // console.log(rememberArray);
 
   const compareArrays = (a, b) =>
     a.length === b.length && a.every((element, index) => element === b[index]);
-
-  console.log(solutionButtonClicked);
 
   let status;
   if (compareArrays(difficultyCopy, solution)) {
@@ -100,6 +98,7 @@ const Sudoku = () => {
   const handleReset = async () => {
     setPuzzle([]);
     setDifficulty([]);
+    setRememberArray([]);
     setDifficultyCopy([]);
     setFieldClicked(false);
     setFieldId(-1);
